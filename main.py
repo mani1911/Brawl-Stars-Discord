@@ -5,6 +5,7 @@ import re
 from dotenv import load_dotenv
 from helpers.content import BOT_HELP
 from helpers.scrape import ScrapeBSBlog
+from helpers.api import GetBrawlEvents
 
 # Load all env
 load_dotenv()
@@ -47,8 +48,20 @@ async def on_message(message):
         except Exception as e:
             print(f"An error occurred: {e}")
             return 'I am unable to fetch Brawl Stars news at the moment'
+    elif msg_arr[1] == 'current-events':
+        events = GetBrawlEvents()
+        try:
+            if type(events) is list:
+                msg = 'Current Events : \n'
+                ind = 1
+                for event in events:
+                    msg += f'{ind}. \n Event : {event[0]} \n Map : {event[1]} \n \n'
+                    ind += 1
+            await message.channel.send(msg)
+        except Exception as e:
+            print(e)
+            await message.channel.send(events)
+            
     
-
-
 
 client.run(token)
