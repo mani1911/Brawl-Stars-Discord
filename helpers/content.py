@@ -1,0 +1,1 @@
+BOT_HELP = '''I am Brawlly, the Brawl Stars Bot! I love Brawl Stars as much as you do! You can ask me questions about Brawl Stars. Check out my help page for more information.'''
